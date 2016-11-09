@@ -1,0 +1,28 @@
+{
+  "name": "gc-slideshow-prototype",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify ./js/script.js -o ./assets/bundle.js",
+    "watch": "watchify ./js/script.js -o ./assets/bundle.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "express": "^4.14.0",
+    "jquery": "^3.1.1",
+    "slick-carousel-browserify": "^1.6.12",
+    "watchify": "^3.7.0"
+  },
+  "devDependencies": {
+    "browserify": "^13.1.1",
+    "gulp": "^3.9.1",
+    "gulp-live-server": "0.0.30",
+    "gulp-sass": "^2.3.2",
+    "vinyl-transform": "^1.0.0",
+    "watchify": "^3.7.0"
+  }
+}
