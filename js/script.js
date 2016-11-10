@@ -1,9 +1,9 @@
 var $ = require('jquery');
-var slick = require('slick-carousel-browserify');
 
 var currentSlide;
 var paused = false;
 var counter = 0;
+var animationend = 'webkitAnimationEnd oanimationend msAnimationEnd animationend';
 
 var Slideshow = {
 
@@ -11,7 +11,7 @@ var Slideshow = {
         this.initImages();
         this.clickArrow();
         this.keyArrow();
-        this.checkLeftSlide();
+        // this.checkLeftSlide();
     },
     imgs: [{
         name: "Ed Templeton",
@@ -39,7 +39,6 @@ var Slideshow = {
             'src': this.imgs[1].src,
             'alt': this.imgs[1].id
         });
-        this.checkLeftSlide();
     },
     clickArrow: function() {
         var self = this;
@@ -51,8 +50,7 @@ var Slideshow = {
         $("body").keydown(function(e) {
             if (e.keyCode == 39) {
                 self.nextSlide();
-                self.checkLeftSlide();
-                // self.cycleImgHeight();
+                // self.checkLeftSlide();
             }
             if (e.keyCode == 37) {
                 self.prevSlide();
@@ -77,7 +75,7 @@ var Slideshow = {
       if(counter >= this.imgs.length - 1){
         counter = 0;
       }
-      console.log('counter = ' + counter);
+      counter = counter + 1;
       var sizeClass = ['full-size','medium','small'];
       $('#right-slider-img').removeClass('full-size medium small');
       if($rightSlideIndex !== 1){
@@ -85,24 +83,25 @@ var Slideshow = {
       }
     },
     nextSlide: function() {
+        var self = this;
+        var $leftImage = $('#left-slider-img');
+        var $rightImage = $('#right-slider-img');
 
-        if (paused === true) {
-            return;
-        }
+        if (paused === true) { return; }
         paused = true;
 
-        currentSlide = parseInt($('#right-slider-img').attr('alt'));
-        var currentSlideSrc = $('#right-slider-img').attr('src');
+        currentSlide = parseInt($rightImage.attr('alt'));
+        var currentSlideSrc = $rightImage.attr('src');
 
-        $('#left-slider-img').attr({
-            'src': currentSlideSrc,
-            'alt': currentSlide
-        });
-        $('#left-slider-img').addClass('fade-in');
-        $('#left-slider-img').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
-            function(e) {
-                $('#left-slider-img').removeClass('fade-in');
-            });
+        $leftImage.addClass('slide-left').one(animationend, function(){
+          self.checkLeftSlide();
+          $(this).attr( {'src': currentSlideSrc,'alt': currentSlide} );
+          $(this).addClass('fade-in-do')
+          $(this).removeClass('slide-left');
+          $(this).one(animationend, function(e){
+            $(this).removeClass('fade-in-do');
+          })
+        })
 
         currentSlide++;
 
@@ -111,17 +110,18 @@ var Slideshow = {
         }
 
         var nextSrc = Slideshow.imgs[currentSlide].src;
-        $('#right-slider-img').attr({
-            'src': nextSrc,
-            'alt': currentSlide
-        });
-        $('#right-slider-img').addClass('fade-in');
-        $('#right-slider-img').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
-            function(e) {
-                $('#right-slider-img').removeClass('fade-in');
-                paused = false;
-            });
-        this.cycleImgHeight();
+        $rightImage.addClass('slide-left').one(animationend, function(){
+          $(this).attr( {'src': nextSrc,'alt': currentSlide} );
+          $(this).addClass('fade-in-do')
+          $(this).removeClass('slide-left');
+          self.cycleImgHeight();
+          $(this).one(animationend, function(e){
+            $(this).removeClass('fade-in-do');
+            paused = false;
+          })
+        })
+
+        // this.cycleImgHeight();
     },
     prevSlide: function() {
 
@@ -156,3 +156,15 @@ var Slideshow = {
 }
 
 Slideshow.init();
+
+// $leftImage.attr( {'src': currentSlideSrc,'alt': currentSlide} );
+// $leftImage.addClass('fade-in');
+// $leftImage.one(animationend, function(e) {
+//         $leftImage.removeClass('fade-in-do');
+//     });
+// $rightImage.attr( {'src': nextSrc,'alt': currentSlide} );
+// $rightImage.addClass('fade-in');
+// $rightImage.one(animationend, function(e) {
+//         $rightImage.removeClass('fade-in');
+//         paused = false;
+//     });

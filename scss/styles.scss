@@ -1,128 +1,245 @@
 @import 'reset';
-@import 'slick';
-
 @font-face {
     font-family: "Helvetica Neue";
     src: url("fonts/HelveticaNeueDeskInterface-Regular.ttf") format("truetype");
 }
 
-body{
-  font-family: "Helvetica Neue";
+body {
+    font-family: "Helvetica Neue";
 }
 
-.product-container{
-  height: 100vh;
-  position: relative;
-}
-.left-slider{
-  height: 100%;
-  padding: 0;
-  overflow: hidden;
-  #left-slider-img{
-    &.full-size{
-      height: 100%;
-      width: auto;
-    }
-  }
-  img{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    &.fade-in{
-      animation: fade-in .4s ease-out;
-    }
-    &.full-size{
-      height: 100%;
-      width: auto;
-    }
-  }
-}
-.right-slider{
-  height: 100%;
-  padding: 0;
-  overflow: hidden;
-  #right-slider-img{
-    &.full-size{
-      height: 100%;
-      width: auto;
-    }
-    &.medium{
-      height: 90%;
-      width: auto;
-    }
-    &.small{
-      height: 75%;
-      width: auto;
-    }
-  }
-  img{
-    position: absolute;
-    bottom: 0;
-    &.fade-in{
-      animation: fade-in .4s ease-out;
-    }
-  }
-}
-.next-arrow{
-  position: absolute;
-  top: 50%;
-  right: 90px;
-  width: 65px;
-  height: 65px;
-  &:hover{
-    cursor: pointer;
-  }
-  // transform: translateY(-50%);
-  img{
-    width: 100%;
-    height: auto;
-  }
-}
-.prev-arrow{
-  position: absolute;
-  top: 50%;
-  left: 90px;
-  width: 65px;
-  height: 65px;
-  transform: rotateY(180deg);
-  z-index: 100;
-  &:hover{
-    cursor: pointer;
-  }
-  img{
-    width: 100%;
-    height: auto;
-  }
-}
-.product-description{
-  padding-left: 50px;
-  padding-top: 120px;
-  height: 100%;
-}
-.product-name{
-  font-size: 2em;
-  width: 80%;
-  margin-bottom: 25px;
+.product-container {
+    height: 100vh;
+    position: relative;
 }
 
+.left-slider {
+    height: 100%;
+    padding: 0;
+    overflow: hidden;
+
+    #left-slider-img {
+        &.full-size {
+            height: 100%;
+            width: auto;
+            margin: 0;
+        }
+        &.slide-left{
+          animation: slide-left .3s linear forwards;
+        }
+        &.fade-in-do{
+          animation: fade-in-do .3s linear;
+        }
+    }
+
+    img {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        margin-bottom: 50px;
+
+        &.fade-in {
+            animation: fade-in 0.4s ease-out;
+        }
+        &.slide-left{
+          animation: slide-left .2s linear forwards;
+        }
+        &.fade-in-do{
+          animation: fade-in-do .3s linear;
+        }
+    }
+}
+
+.right-slider {
+    height: 100%;
+    padding: 0;
+    overflow: hidden;
+
+    #right-slider-img {
+        &.full-size {
+            height: 100%;
+            width: auto;
+        }
+
+        &.medium {
+            height: 90%;
+            width: auto;
+        }
+
+        &.small {
+            height: 75%;
+            width: auto;
+        }
+    }
+
+    img {
+        position: absolute;
+        bottom: 0;
+        &.slide-left{
+          animation: slide-left 0.3s linear forwards;
+        }
+        &.fade-in-do{
+          animation: fade-in-do .3s linear;
+        }
+
+        &.fade-in {
+            animation: fade-in 0.3s linear;
+        }
+    }
+}
+
+.next-arrow {
+    position: absolute;
+    top: 50%;
+    right: 90px;
+    width: 65px;
+    height: 65px;
+
+    &:hover {
+        cursor: pointer;
+    }
+    // transform: translateY(-50%);
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.prev-arrow {
+    position: absolute;
+    top: 50%;
+    left: 90px;
+    width: 65px;
+    height: 65px;
+    transform: rotateY(180deg);
+    z-index: 100;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.product-description {
+    padding-left: 50px;
+    padding-top: 120px;
+    height: 100%;
+}
+
+.product-name {
+    font-size: 2em;
+    width: 80%;
+    margin-bottom: 25px;
+    text-decoration: underline;
+    line-height: 40px;
+}
+
+.cost {
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+.selection {
+    li {
+        display: inline-block;
+        margin-right: 20px;
+        margin-bottom: 25px;
+    }
+}
+
+.button {
+    padding: 10px 15px;
+    display: inline-block;
+    margin-right: 15px;
+    border: 3px solid #1C2A30;
+    font-size: 10px;
+    margin-bottom: 25px;
+
+    &:hover {
+        background-color: #1C2A30;
+        color: #fff;
+    }
+}
+
+.info {
+    font-size: 10px;
+
+    li {
+        display: inline-block;
+        margin-right: 20px;
+    }
+    margin-bottom: 25px;
+}
+
+.description {
+    font-size: 12px;
+    width: 70%;
+    margin-bottom: 15px;
+    line-height: 16px;
+}
+
+.specs {
+    font-size: 12px;
+    line-height: 16px;
+    margin-bottom: 25px;
+}
+
+.lightbox {
+    li {
+        height: 75px;
+        width: 50px;
+        overflow: hidden;
+        display: inline-block;
+        margin-right: 5px;
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+}
 @keyframes fade-in {
-  0% {
-    // transform: translateX(100%);
-    opacity: 0;
-  }
-  100% {
-    // transform: translateX(0%);
-    opacity: 1;
-  }
-}
+    0% {
+        // transform: translateX(100%);
+        opacity: 0;
+    }
 
-@keyframes slide-out {
+    100% {
+        // transform: translateX(0%);
+        opacity: 1;
+    }
+}
+@keyframes fade-in-do {
+    0% {
+        transform: translateX(100%);
+        // opacity: 0;
+    }
+
+    100% {
+        // transform: translateX(0%);
+        // opacity: 1;
+    }
+}
+@keyframes fade-in {
+    0% {
+        transform: translateX(100%);
+        // opacity: 1;
+    }
+
+    100% {
+        transform: translateX(0%);
+        // opacity: 0;
+    }
+}
+@keyframes slide-left {
   0% {
     transform: translateX(0%);
-    opacity: 1;
   }
   100% {
-    transform: translateX(-100%);
-    opacity: 0;
+    transform: translateX(-120%);
   }
 }
